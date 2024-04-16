@@ -17,6 +17,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   Home
                 </Link>
               </li>
+              <li>
+                <Link to={"/inkWellForge"} className={styles.nav_link}>
+                  Ink Well Forge
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
