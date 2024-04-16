@@ -1,0 +1,50 @@
+.info_button {
+  z-index: 2;
+  position: absolute;
+  top: 80px;
+  right: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--primary-pink);
+  transition: background-color 0.3s;
+}
+.info_button * {
+  color: var(--primary-bg-color);
+}
+
+.info_button:hover {
+  background-color: var(--primary-light-pink);
+  cursor: pointer;
+}
+.dialog_title {
+  background-color: var(--secondary-light-pink);
+  text-align: center;
+}
+.icon_button {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+.info_content {
+  padding: 20px;
+  max-width: 500px;
+  line-height: 1.6;
+}
+.info_content p {
+  font-weight: bold;
+}
+
+.info_content ul {
+  list-style: none;
+  margin: 10px 0 20px;
+}
+
+.info_content li {
+  margin-bottom: 10px;
+}
+
+.info_content strong {
+  color: var(--primary);
+  font-weight: bold;
+}

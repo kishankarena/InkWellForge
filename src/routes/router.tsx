@@ -1,11 +1,11 @@
 import { lazy } from "react";
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import { SuspenseErrorBoundary } from "./SuspenseErrorBoundary";
+import InkWellForge from "src/components/InkWellForge/InkWellForge";
 
 //lazy imports
 const Home = lazy(() => import("../components/home/Home"));
 const About = lazy(() => import("../components/about/About"));
-const Contact = lazy(() => import("../components/contact/Contact"));
 const PrivateRoutes = lazy(() => import("./PrivateRouter"));
 
 const router = createBrowserRouter(
@@ -28,10 +28,10 @@ const router = createBrowserRouter(
           }
         />
         <Route
-          path="/contact"
+          path="/inkWellForge"
           element={
             <SuspenseErrorBoundary>
-              <Contact />
+              <InkWellForge />
             </SuspenseErrorBoundary>
           }
         />

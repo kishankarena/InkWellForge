@@ -23,3 +23,10 @@ textarea,
 select {
   font: inherit;
 }
+
+:root {
+--primary-pink: #ef5366;
+--primary-light-pink: #fc818b;
+--primary-bg-color: white;
+--secondary-light-pink: #fff0f0;
+}
