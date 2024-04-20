@@ -25,8 +25,13 @@ select {
 }
 
 :root {
---primary-pink: #ef5366;
---primary-light-pink: #fc818b;
---primary-bg-color: white;
---secondary-light-pink: #fff0f0;
+  --primary-pink: #ef5366;
+  --primary-light-pink: #fc818b;
+  --primary-bg-color: white;
+  --secondary-light-pink: #fff0f0;
+  --border-color: #e7e6f7;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --secondary-bg-color: #f0efff;
+  --primary-text-color: #27272c;
+  --secondary-text-color: #b8b8b8;
 }
