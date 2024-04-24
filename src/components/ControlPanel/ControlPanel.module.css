@@ -1,0 +1,61 @@
+.control_panel {
+  width: 300px;
+  display: flex;
+  gap: 20px;
+  position: fixed;
+  z-index: 2;
+  bottom: 20px;
+  left: 20px;
+}
+
+.control_panel button {
+  padding: 10px 15px;
+}
+
+.control_panel button:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.zoom_panel {
+  border-radius: 8px;
+  display: flex;
+  background-color: var(--panel-bg-color);
+}
+
+.zoom_panel button,
+.edit_panel button {
+  border: none;
+  color: #27272c;
+  font-size: 0.9em;
+  background-color: transparent;
+}
+
+.zoom_panel button svg {
+  width: 20px;
+  height: 20px;
+  color: #27272c;
+}
+
+.edit_panel {
+  border-radius: 8px;
+  display: flex;
+  background-color: var(--panel-bg-color);
+}
+
+.edit_panel button svg {
+  width: 20px;
+  height: 20px;
+  color: #27272c;
+}
+
+.edit_panel button:first-child,
+.zoom_panel button:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.edit_panel button:last-child,
+.zoom_panel button:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
