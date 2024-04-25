@@ -14,6 +14,7 @@ import { adjustmentRequired } from "src/utils/adjustmentRequired";
 import { adjustElementCoordinates } from "src/utils/adjustElementCoordinates";
 import { resizedCoordinates } from "src/utils/resizedCoordinates";
 import { drawElement } from "src/utils/drawElement";
+import ControlPanel from "../ControlPanel/ControlPanel";
 
 const InkWellForge = () => {
   const initialTool: ToolsType = Tools.selection;
@@ -29,7 +30,7 @@ const InkWellForge = () => {
     y: 0,
   });
 
-  const [elements, setElements, undo, redo] = useHistory([]);
+  const { elements, setElements, undo, redo } = useHistory([]);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const pressedKeys = usePressedKeys();
 
@@ -83,10 +84,28 @@ const InkWellForge = () => {
     };
 
     document.addEventListener("keydown", undoRedoFunction);
-    return () => {      
+    return () => {
       document.removeEventListener("keydown", undoRedoFunction);
     };
   }, [undo, redo]);
+
+  useEffect(() => {
+    const panOrZoomFunction = (event: WheelEvent) => {
+      if (pressedKeys.has("Meta") || pressedKeys.has("Control")) {
+        onZoom(event.deltaY * -0.01);
+      } else {
+        setPanOffset((prevState) => ({
+          x: prevState.x - event.deltaX,
+          y: prevState.y - event.deltaY,
+        }));
+      }
+    };
+
+    document.addEventListener("wheel", panOrZoomFunction);
+    return () => {
+      document.removeEventListener("wheel", panOrZoomFunction);
+    };
+  }, [pressedKeys]);
 
   const updateElement = (
     id: number,
@@ -138,6 +157,7 @@ const InkWellForge = () => {
   const getMouseCoordinates = (event: React.MouseEvent) => {
     const clientX = (event.clientX - panOffset.x * scale + scaleOffset.x) / scale;
     const clientY = (event.clientY - panOffset.y * scale + scaleOffset.y) / scale;
+                                                                                                                  
     return { clientX, clientY };
   };
 
@@ -309,10 +329,15 @@ const InkWellForge = () => {
     }
   };
 
+  const onZoom = (delta: number) => {
+    setScale((prevState) => Math.min(Math.max(prevState + delta, 0.1), 20));
+  };
+
   return (
     <>
       <Info />
       <ActionBar tool={tool} setTool={setTool} />
+      <ControlPanel undo={undo} redo={redo} onZoom={onZoom} scale={scale} setScale={setScale} />
       {action === "writing" ? (
         <textarea
           ref={textAreaRef}
