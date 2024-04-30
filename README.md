@@ -1,49 +1,35 @@
-![Logo](https://www.simform.com/wp-content/uploads/2022/12/logo.svg)
-# React Js Boilerplate
-This boilerplate is starting point of any project with all batteries included. you can directly start development without spending time on project setup.
-## Tech Stack
-**Client:** [React](react.dev), [Typescript](https://www.typescriptlang.org), [Vite](https://vitejs.dev/),  [React Router](https://reactrouter.com/en/main), 
+# InkWellForge
+ InkWellForge is created with React & TypeScript. Rough.js is used for the sketchy,hand drawn style and Tippy.js is used for design control panel for functionality i.e. Zoom in-out , Undo-Redo.
  
+## Tech Stack
+-`React.js`
+-`Typescript`
+-`vite`
+-`Rough.js`
+-`Tippy.js`
+-`css`
 
-**Styling:** [Material UI](https://mui.com/material-ui/), [Storybook](https://storybook.js.org/), 
+## Features
 
-**Internationalization:** [i18next](https://react.i18next.com/) 
+Here's what you can do with InkWellForge:
 
-**Code Formatter:** [Prettier](https://prettier.io/),   [Eslint](https://eslint.org/) 
+- **Choose a Tool**: You have pencils, lines, rectangles, and text tools. Pick one and start creating.
 
+- **Draw and Move**: Click and drag on the canvas to draw. To move something, select it and drag it to a new spot. Also, resize elements by dragging the corners. Resizing only works on rectangles or lines.
 
-### Developer Guide
+- **Edit Text**: Click on the canvas and start typing to add text to your drawings. You can also edit existing text.
 
-1. To begin, set your Git username and email using the following commands:
-   - `git config user.name "{username}"`
-   - `git config user.email "{email}"`
+- **Zoom**: Use Ctrl + Scroll or click on the buttons to zoom in for detail or out to see the whole picture.
 
-2. Avoid pushing or committing directly to the `main` branch.
+- **Pan**: Hold the Space bar and drag or use the middle mouse button to move around the whiteboard canvas.
 
-3. When creating a new branch, use one of the following naming conventions:
-   - `feature/feature-name`
-   - `bug/bug-details`
-   - `design/design-details`
+###  Keyboard Shortcuts:
 
-4. Format your commit messages as `Ticket number : Title` only. For example: `T-101 : Deploy site on production environment.`
+Speed up your work with these shortcuts:
 
-5. Prior to committing, ensure you verify and resolve linting issues by running the following commands:
-   - `npm run lint`
-   - `npm run lint:fix`
+- **Canvas Navigation**: Press the Space bar and drag or use the middle mouse button.
+- **Undo**: Ctrl + Z.
+- **Redo**: Ctrl + Y or Ctrl + Shift + Z.
+- **Zoom In**: Ctrl + Plus.
+- **Zoom Out**: Ctrl + Minus.
 
-6. Each Pull Request (PR) should contain only a single commit. If you've made multiple commits, rebase them into a single commit before submitting the PR.
-
-7. Add comments when necessary for better understanding, and make further improvements as needed.
-
-8. Customize the ESLint rules in the .eslintrc.cjs file to meet your project's specific requirements.
-
-### Other useful scripts
-- `npm run build` to build a project
-- `npm run dev` to run (dev) a project
-- `npm run build` to build a project
-- `npm run preview` to run preview a project
-- `npm run lint` to lint a project 
- - `npm run lint:fix` to lint:fix a project
-- `npm run format` to format a project
-- `npm run storybook` to start storybook dev server 
- - `npm run build-storybook` to build storybook

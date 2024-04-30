@@ -5,7 +5,6 @@ import InkWellForge from "src/components/InkWellForge/InkWellForge";
 
 //lazy imports
 const Home = lazy(() => import("../components/home/Home"));
-const About = lazy(() => import("../components/about/About"));
 const PrivateRoutes = lazy(() => import("./PrivateRouter"));
 
 const router = createBrowserRouter(
@@ -32,14 +31,6 @@ const router = createBrowserRouter(
           element={
             <SuspenseErrorBoundary>
               <InkWellForge />
-            </SuspenseErrorBoundary>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <SuspenseErrorBoundary>
-              <About />
             </SuspenseErrorBoundary>
           }
         />
