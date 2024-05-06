@@ -2,6 +2,8 @@
 
 InkWellForge is a project built with React & TypeScript. It utilizes Rough.js for a sketchy, hand-drawn style and Tippy.js for a design control panel for functionalities like Zoom in-out and Undo-Redo.
 
+Link : https://inkwellforge.netlify.app/
+
 ## Tech Stack
 - React.js
 - TypeScript
