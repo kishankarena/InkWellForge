@@ -332,7 +332,7 @@ const InkWellForge = () => {
   const onZoom = (delta: number) => {
     setScale((prevState) => Math.min(Math.max(prevState + delta, 0.1), 20));
   };
-
+  console.log("action", action);
   return (
     <>
       <Info />
@@ -342,7 +342,7 @@ const InkWellForge = () => {
         <textarea
           ref={textAreaRef}
           onBlur={handleBlur}
-          className={styles.texr_area}
+          className={styles.text_area}
           style={{
             top: selectedElement ? (selectedElement.y1 - 2) * scale + panOffset.y * scale - scaleOffset.y : 0,
             left: selectedElement ? selectedElement.x1 * scale + panOffset.x * scale - scaleOffset.x : 0,
@@ -353,7 +353,7 @@ const InkWellForge = () => {
       <canvas
         id="canvas"
         width={window.innerWidth}
-        height={window.innerHeight}
+        height={`${window.innerHeight - 79}`}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
