@@ -21,13 +21,11 @@ export const useHistory = (initialState: ElementType[]) => {
   const undo = () => index > 0 && setIndex((prevState) => prevState - 1);
   const redo = () => index < history.length - 1 && setIndex((prevState) => prevState + 1);
 
-  // const iterator = () => history[index][Symbol.iterator]();
 
   return {
     elements: history[index],
     setElements: setState,
     undo,
     redo,
-    // [Symbol.iterator]: iterator,
   };
 };
