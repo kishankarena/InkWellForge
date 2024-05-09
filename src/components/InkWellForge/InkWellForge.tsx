@@ -15,6 +15,8 @@ import { adjustElementCoordinates } from "src/utils/adjustElementCoordinates";
 import { resizedCoordinates } from "src/utils/resizedCoordinates";
 import { drawElement } from "src/utils/drawElement";
 import ControlPanel from "../ControlPanel/ControlPanel";
+import ToastNotify from "../ToastNotify/ToastNotify";
+import useNotification from "src/hooks/useNotification";
 
 const InkWellForge = () => {
   const initialTool: ToolsType = Tools.selection;
@@ -33,6 +35,7 @@ const InkWellForge = () => {
   const { elements, setElements, undo, redo } = useHistory([]);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const pressedKeys = usePressedKeys();
+  const { message, showNotification, hideNotification } = useNotification();
 
   useEffect(() => {
     const textarea = textAreaRef.current;
@@ -63,7 +66,7 @@ const InkWellForge = () => {
 
     elements.forEach((element: ElementType) => {
       if (action === "writing" && selectedElement && selectedElement.id === element.id) return;
-      drawElement(roughCanvas, context, element);
+      drawElement(roughCanvas, context, element, showNotification);
     });
     context.restore();
   }, [elements, action, selectedElement, panOffset, scale]);
@@ -131,25 +134,28 @@ const InkWellForge = () => {
       case Tools.text: {
         const canvas = document.getElementById("canvas");
         if (!(canvas instanceof HTMLCanvasElement)) {
-          throw new Error("Canvas element not found");
+          showNotification("Canvas element not found");
+          return;
         }
         const context = canvas.getContext("2d");
         if (!context) {
-          throw new Error("Could not get 2D context from canvas");
+          showNotification("Could not get 2D context from canvas");
+          return;
         }
         if (!options) {
-          throw new Error("No text options provided for text tool");
+          showNotification("No text options provided for text tool");
+          return;
         }
-        const textWidth = context.measureText(options.text).width;
+        const textWidth = context.measureText(options?.text).width;
         const textHeight = 24;
         elementsCopy[id] = {
           ...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type),
-          text: options.text,
+          text: options?.text,
         };
         break;
       }
       default:
-        throw new Error(`Type not recognised: ${type}`);
+        showNotification(`Type not recognised: ${type}`);
     }
     setElements(elementsCopy, true);
   };
@@ -157,7 +163,7 @@ const InkWellForge = () => {
   const getMouseCoordinates = (event: React.MouseEvent) => {
     const clientX = (event.clientX - panOffset.x * scale + scaleOffset.x) / scale;
     const clientY = (event.clientY - panOffset.y * scale + scaleOffset.y) / scale;
-                                                                                                                  
+
     return { clientX, clientY };
   };
 
@@ -180,7 +186,7 @@ const InkWellForge = () => {
     }
 
     if (tool === Tools.selection) {
-      const element = getElementAtPosition(clientX, clientY, elements);
+      const element = getElementAtPosition(clientX, clientY, elements, showNotification);
 
       if (element) {
         let selectedElement: SelectedElementType = { ...element };
@@ -227,7 +233,7 @@ const InkWellForge = () => {
     }
 
     if (tool === Tools.selection) {
-      const element = getElementAtPosition(clientX, clientY, elements);
+      const element = getElementAtPosition(clientX, clientY, elements, showNotification);
 
       if (element && element.position) {
         (event.target as HTMLElement).style.cursor = cursorForPosition(element.position);
@@ -332,7 +338,6 @@ const InkWellForge = () => {
   const onZoom = (delta: number) => {
     setScale((prevState) => Math.min(Math.max(prevState + delta, 0.1), 20));
   };
-  console.log("action", action);
   return (
     <>
       <Info />
@@ -359,6 +364,7 @@ const InkWellForge = () => {
         onMouseUp={handleMouseUp}
         style={{ position: "absolute", zIndex: 1 }}
       />
+      <ToastNotify message={message} onClose={hideNotification} />
     </>
   );
 };
