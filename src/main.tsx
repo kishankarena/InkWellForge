@@ -1,6 +1,5 @@
 import { ThemeProvider } from "@mui/material";
 import theme from "src/theme/theme";
-import "src/utils/i18n";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
