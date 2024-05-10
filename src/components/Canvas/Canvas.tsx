@@ -46,7 +46,7 @@ interface CanvasProps {
   ) => void;
 }
 
-const Canvas = ({
+const Canvas: React.FC<CanvasProps> = ({
   tool,
   action,
   scale,
@@ -60,7 +60,7 @@ const Canvas = ({
   setPanOffset,
   setElements,
   updateElement,
-}: CanvasProps) => {
+}) => {
   const [startPanMousePosition, setStartPanMousePosition] = useState({
     x: 0,
     y: 0,

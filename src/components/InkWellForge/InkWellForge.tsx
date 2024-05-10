@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import styles from "./InkWellForge.module.css";
 import { Tools, ToolsType, ActionsType, ElementType } from "src/types";
 import ActionBar from "../ActionBar/ActionBar";
 import Info from "../Info/Info";
@@ -11,6 +10,7 @@ import ControlPanel from "../ControlPanel/ControlPanel";
 import ToastNotify from "../ToastNotify/ToastNotify";
 import useNotification from "src/hooks/useNotification";
 import Canvas from "../Canvas/Canvas";
+import TextArea from "../TextArea/TextArea";
 
 const InkWellForge = () => {
   const initialTool: ToolsType = Tools.selection;
@@ -147,31 +147,29 @@ const InkWellForge = () => {
       <ActionBar tool={tool} setTool={setTool} />
       <ControlPanel undo={undo} redo={redo} onZoom={onZoom} scale={scale} setScale={setScale} />
       {action === "writing" ? (
-        <textarea
-          ref={textAreaRef}
-          onBlur={handleBlur}
-          className={styles.text_area}
-          style={{
-            top: selectedElement ? (selectedElement.y1 - 2) * scale + panOffset.y * scale - scaleOffset.y : 0,
-            left: selectedElement ? selectedElement.x1 * scale + panOffset.x * scale - scaleOffset.x : 0,
-            font: `${24 * scale}px sans-serif`,
-          }}
-        />
-      ) : null}
-      <Canvas
-          tool={tool}
+        <TextArea
           action={action}
           scale={scale}
           panOffset={panOffset}
           scaleOffset={scaleOffset}
           selectedElement={selectedElement}
-          elements={elements}
-          setAction={setAction}
-          setScaleOffset={setScaleOffset}
-          setSelectedElement={setSelectedElement}
-          setPanOffset={setPanOffset}
-          setElements={setElements}
-          updateElement={updateElement}
+          handleBlur={handleBlur}
+        />
+      ) : null}
+      <Canvas
+        tool={tool}
+        action={action}
+        scale={scale}
+        panOffset={panOffset}
+        scaleOffset={scaleOffset}
+        selectedElement={selectedElement}
+        elements={elements}
+        setAction={setAction}
+        setScaleOffset={setScaleOffset}
+        setSelectedElement={setSelectedElement}
+        setPanOffset={setPanOffset}
+        setElements={setElements}
+        updateElement={updateElement}
       />
       <ToastNotify message={message} onClose={hideNotification} />
     </>
