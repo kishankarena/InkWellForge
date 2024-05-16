@@ -1,7 +1,12 @@
 import getStroke from "perfect-freehand";
 import { ElementType } from "../types";
 
-export const drawElement = (roughCanvas: any, context: CanvasRenderingContext2D, element: ElementType) => {
+export const drawElement = (
+  roughCanvas: any,
+  context: CanvasRenderingContext2D,
+  element: ElementType,
+  showNotification: (msg: string) => void,
+) => {
   switch (element.type) {
     case "line":
     case "rectangle":
@@ -9,12 +14,13 @@ export const drawElement = (roughCanvas: any, context: CanvasRenderingContext2D,
       break;
     case "pencil": {
       if (!element.points) {
-        throw new Error("Pencil element points are undefined");
+        showNotification("Pencil element points are undefined");
+        return;
       }
       const strokePoints = getStroke(element.points);
       const formattedPoints: [number, number][] = strokePoints.map((point) => {
         if (point.length !== 2) {
-          throw new Error(`Expected point to have exactly 2 elements, got ${point.length}`);
+          showNotification(`Expected point to have exactly 2 elements, got ${point.length}`);
         }
         return [point[0], point[1]];
       });
@@ -30,7 +36,7 @@ export const drawElement = (roughCanvas: any, context: CanvasRenderingContext2D,
       break;
     }
     default:
-      throw new Error(`Type not recognised: ${element.type}`);
+      showNotification(`Type not recognised: ${element.type}`);
   }
 };
 

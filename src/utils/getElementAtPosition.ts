@@ -1,16 +1,21 @@
 import { nearPoint } from "./nearPoint";
 import { ElementType, PointType, Tools } from "../types";
 
-export const getElementAtPosition = (x: number, y: number, elements: ElementType[]) => {
+export const getElementAtPosition = (
+  x: number,
+  y: number,
+  elements: ElementType[],
+  showNotification: (msg: string) => void,
+) => {
   return elements
     .map((element) => ({
       ...element,
-      position: positionWithinElement(x, y, element),
+      position: positionWithinElement(x, y, element, showNotification),
     }))
     .find((element) => element.position !== null);
 };
 
-const positionWithinElement = (x: number, y: number, element: ElementType) => {
+const positionWithinElement = (x: number, y: number, element: ElementType, showNotification: (msg: string) => void) => {
   const { type, x1, x2, y1, y2 } = element;
   switch (type) {
     case Tools.line: {
@@ -38,7 +43,7 @@ const positionWithinElement = (x: number, y: number, element: ElementType) => {
     case Tools.text:
       return x >= x1 && x <= x2 && y >= y1 && y <= y2 ? "inside" : null;
     default:
-      throw new Error(`Type not recognised: ${type}`);
+      showNotification(`Type not recognised: ${type}`);
   }
 };
 
